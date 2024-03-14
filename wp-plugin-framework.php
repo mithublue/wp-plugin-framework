@@ -18,7 +18,7 @@ if (!defined('ABSPATH')) {
 define( 'PLUGIN_DIR', dirname( __FILE__ ) );
 define( 'ASSET_URL', plugins_url( 'assets', __FILE__ ) );
 
-class WPPluginFramework {
+class WP_PluginFramework {
 
 	/**
 	 * Initialize the plugin
@@ -29,6 +29,17 @@ class WPPluginFramework {
 
 		// Initialize core functionality
 		add_action('init', array($this, 'init'));
+
+		// Include necessary files
+		$this->include_files();
+
+		if ( is_admin() ) {
+			$this->include_admin_files();
+		}
+
+		//register post type
+		$this->register_post_types();
+		$this->register_taxonomy();
 
 		// Add more hooks and actions as needed
 
@@ -45,14 +56,9 @@ class WPPluginFramework {
 	 * Initialize the plugin
 	 */
 	public function init() {
-		// Include necessary files
-		$this->include_files();
-
 		// Initialize modules
 		$this->init_modules();
 
-		//register post type
-		$this->register_post_types();
 		// Add more initialization tasks as needed
 
 	}
@@ -75,19 +81,23 @@ class WPPluginFramework {
 		// Add more file inclusions as needed
 	}
 
+	private function include_admin_files() {
+		require_once plugin_dir_path(__FILE__) . 'includes/admin/class-admin.php';
+	}
+
 	/**
 	 * Initialize modules
 	 */
 	private function init_modules() {
 		// Initialize individual modules using the Module Manager
-		$module_manager = new ModuleManager();
+		$module_manager = new WPPF_ModuleManager();
 		$module_manager->register_module( 'sample-module', 'Sample_Module' );
 		$module_manager->init_modules();
 	}
 
 	public function register_post_types() {
 		// Instantiate the custom post type class
-		$custom_post_type = new WP_CustomPostType(
+		$custom_post_type = new WPPF_CustomPostType(
 			'my_custom_post_type',
 			array(
 				'singular' => __('Custom Post', 'my-plugin-domain'),
@@ -99,8 +109,23 @@ class WPPluginFramework {
 		);
 
 	}
+
+	public function register_taxonomy() {
+		// Instantiate the taxonomy class
+		$taxonomy = new WPPF_Taxonomy(
+			'my_custom_taxonomy',
+			array('my_custom_post_type'), // Array of post types to which the taxonomy should be attached
+			array(
+				'singular' => __('Custom Taxonomy', 'my-plugin-domain'),
+				'plural'   => __('Custom Taxonomies', 'my-plugin-domain'),
+			),
+			array(
+				// Additional arguments for register_taxonomy
+			)
+		);
+	}
 }
 
 // Instantiate the plugin
-$wp_plugin_framework = new WPPluginFramework();
+$wp_plugin_framework = new WP_PluginFramework();
 

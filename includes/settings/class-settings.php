@@ -2,7 +2,7 @@
 /**
  * Settings class for WordPress Plugin Framework
  */
-class MyPluginSettings {
+class WPPF_PluginSettings {
 
 	/**
 	 * The option group used for settings

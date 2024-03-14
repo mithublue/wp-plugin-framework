@@ -2,7 +2,7 @@
 /**
  * Module Manager class for WordPress Plugin Framework
  */
-class ModuleManager {
+class WPPF_ModuleManager {
 
 	/**
 	 * List of registered modules

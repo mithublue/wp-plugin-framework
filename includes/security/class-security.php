@@ -2,7 +2,7 @@
 /**
  * Security class for WordPress Plugin Framework
  */
-class WPPluginSecurity {
+class WPPF_PluginSecurity {
 
 	/**
 	 * Validate email address
@@ -90,6 +90,6 @@ class WPPluginSecurity {
 	 * Prevent direct access to this file
 	 */
 	private function __construct() {
-		die("Direct access not allowed.");
+		die("Direct access denied.");
 	}
 }

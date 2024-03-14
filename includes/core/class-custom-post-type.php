@@ -2,7 +2,7 @@
 /**
  * Custom Post Type class for WordPress Plugin Framework
  */
-class WP_CustomPostType {
+class WPPF_CustomPostType {
 
 	/**
 	 * The post type slug
