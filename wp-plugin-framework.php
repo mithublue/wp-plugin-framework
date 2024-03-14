@@ -37,10 +37,6 @@ class WP_PluginFramework {
 			$this->include_admin_files();
 		}
 
-		//register post type
-		$this->register_post_types();
-		$this->register_taxonomy();
-
 		// Add more hooks and actions as needed
 
 	}
@@ -93,35 +89,7 @@ class WP_PluginFramework {
 		$module_manager->init_modules();
 	}
 
-	public function register_post_types() {
-		// Instantiate the custom post type class
-		$custom_post_type = new WPPF_CustomPostType(
-			'my_custom_post_type',
-			array(
-				'singular' => __('Custom Post', 'my-plugin-domain'),
-				'plural'   => __('Custom Posts', 'my-plugin-domain'),
-			),
-			array(
-				// Additional arguments for register_post_type
-			)
-		);
 
-	}
-
-	public function register_taxonomy() {
-		// Instantiate the taxonomy class
-		$taxonomy = new WPPF_Taxonomy(
-			'my_custom_taxonomy',
-			array('my_custom_post_type'), // Array of post types to which the taxonomy should be attached
-			array(
-				'singular' => __('Custom Taxonomy', 'my-plugin-domain'),
-				'plural'   => __('Custom Taxonomies', 'my-plugin-domain'),
-			),
-			array(
-				// Additional arguments for register_taxonomy
-			)
-		);
-	}
 }
 
 // Instantiate the plugin
