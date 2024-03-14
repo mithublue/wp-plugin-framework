@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "4ec1903fc4b307f16f64ba51f19c7a1a",
+    "content-hash": "8670ef20110cc52d491bc6391a1d88c9",
     "packages": [
         {
             "name": "doctrine/inflector",
@@ -925,6 +925,55 @@
             "time": "2022-06-27T16:58:25+00:00"
         },
         {
+            "name": "tareq1988/wordpress-settings-api-class",
+            "version": "dev-master",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/tareq1988/wordpress-settings-api-class.git",
+                "reference": "243544eeb83be10e629dd89eb487b96e4170ed57"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/tareq1988/wordpress-settings-api-class/zipball/243544eeb83be10e629dd89eb487b96e4170ed57",
+                "reference": "243544eeb83be10e629dd89eb487b96e4170ed57",
+                "shasum": ""
+            },
+            "require": {
+                "php": ">=5.2.4"
+            },
+            "default-branch": true,
+            "type": "library",
+            "autoload": {
+                "classmap": [
+                    "src/"
+                ]
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "GPLv2"
+            ],
+            "authors": [
+                {
+                    "name": "Tareq Hasan",
+                    "email": "tareq@wedevs.com",
+                    "homepage": "http://tareq.wedevs.com",
+                    "role": "Developer"
+                }
+            ],
+            "description": "WordPress settings API Abstraction Class",
+            "homepage": "https://github.com/tareq1988/wordpress-settings-api-class",
+            "keywords": [
+                "settings-api",
+                "wordpress",
+                "wp"
+            ],
+            "support": {
+                "issues": "https://github.com/tareq1988/wordpress-settings-api-class/issues",
+                "source": "https://github.com/tareq1988/wordpress-settings-api-class/tree/master"
+            },
+            "time": "2018-05-01T19:33:47+00:00"
+        },
+        {
             "name": "tareq1988/wp-eloquent",
             "version": "dev-master",
             "source": {
@@ -979,7 +1028,8 @@
     "aliases": [],
     "minimum-stability": "stable",
     "stability-flags": {
-        "tareq1988/wp-eloquent": 20
+        "tareq1988/wp-eloquent": 20,
+        "tareq1988/wordpress-settings-api-class": 20
     },
     "prefer-stable": false,
     "prefer-lowest": false,

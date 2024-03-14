@@ -60,6 +60,7 @@ class WP_PluginFramework {
 		$this->init_modules();
 
 		// Add more initialization tasks as needed
+		wppf_model()->model( Book::class )->all();
 
 	}
 
@@ -69,15 +70,12 @@ class WP_PluginFramework {
 	private function include_files() {
 		require_once plugin_dir_path(__FILE__) . 'includes/core/class-plugin-framework.php';
 		require_once plugin_dir_path(__FILE__) . 'includes/core/class-module-manager.php';
-		require_once plugin_dir_path(__FILE__) . 'includes/core/class-hook-manager.php';
 		require_once plugin_dir_path(__FILE__) . 'includes/core/class-template-manager.php';
 		require_once plugin_dir_path(__FILE__) . 'includes/core/class-custom-post-type.php';
 		require_once plugin_dir_path(__FILE__) . 'includes/core/class-taxonomy.php';
 		require_once plugin_dir_path(__FILE__) . 'includes/settings/class-settings.php';
 		require_once plugin_dir_path(__FILE__) . 'includes/security/class-security.php';
-		require_once plugin_dir_path(__FILE__) . 'includes/utils/class-i18n.php';
-		require_once plugin_dir_path(__FILE__) . 'includes/utils/class-database.php';
-		require_once plugin_dir_path(__FILE__) . 'includes/utils/class-debugger.php';
+		require_once plugin_dir_path(__FILE__) . 'includes/utils/class-model.php';
 		// Add more file inclusions as needed
 	}
 

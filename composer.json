@@ -1,6 +1,7 @@
 {
   "require": {
-    "tareq1988/wp-eloquent": "dev-master"
+    "tareq1988/wp-eloquent": "dev-master",
+    "tareq1988/wordpress-settings-api-class": "dev-master"
   },
   "config": {
     "allow-plugins": {

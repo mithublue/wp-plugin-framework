@@ -3,7 +3,7 @@
         'name' => '__root__',
         'pretty_version' => 'dev-main',
         'version' => 'dev-main',
-        'reference' => 'f188c33d1159e01a13f705273a463185a5b2a680',
+        'reference' => 'b2af29aafb40e6fae1f7863bcdc32cf68ea7a625',
         'type' => 'library',
         'install_path' => __DIR__ . '/../../',
         'aliases' => array(),
@@ -13,7 +13,7 @@
         '__root__' => array(
             'pretty_version' => 'dev-main',
             'version' => 'dev-main',
-            'reference' => 'f188c33d1159e01a13f705273a463185a5b2a680',
+            'reference' => 'b2af29aafb40e6fae1f7863bcdc32cf68ea7a625',
             'type' => 'library',
             'install_path' => __DIR__ . '/../../',
             'aliases' => array(),
@@ -150,6 +150,17 @@
             'provided' => array(
                 0 => '1.0|2.0',
             ),
+        ),
+        'tareq1988/wordpress-settings-api-class' => array(
+            'pretty_version' => 'dev-master',
+            'version' => 'dev-master',
+            'reference' => '243544eeb83be10e629dd89eb487b96e4170ed57',
+            'type' => 'library',
+            'install_path' => __DIR__ . '/../tareq1988/wordpress-settings-api-class',
+            'aliases' => array(
+                0 => '9999999-dev',
+            ),
+            'dev_requirement' => false,
         ),
         'tareq1988/wp-eloquent' => array(
             'pretty_version' => 'dev-master',
