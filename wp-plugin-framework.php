@@ -4,7 +4,7 @@
  * Description: A simple WordPress plugin framework with common features.
  * Version: 1.0.0
  * Author: Mithu A Quayium
- * Text Domain: wp-plugin-framework
+ * Text Domain: wppf
  * Domain Path: /languages
  */
 
@@ -45,7 +45,7 @@ class WP_PluginFramework {
 	 * Load translation files
 	 */
 	public function load_textdomain() {
-		load_plugin_textdomain('wp-plugin-framework', false, dirname(plugin_basename(__FILE__)) . '/languages/');
+		load_plugin_textdomain('wppf', false, dirname(plugin_basename(__FILE__)) . '/languages/');
 	}
 
 	/**
