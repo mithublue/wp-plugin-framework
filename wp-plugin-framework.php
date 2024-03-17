@@ -14,6 +14,7 @@ use App\includes\models\Book;
 use function App\includes\utils\wppf_model;
 
 require_once 'vendor/autoload.php';
+require_once 'facades/WP_Plugin_Framework.php';
 
 // Exit if accessed directly.
 if (!defined('ABSPATH')) {
