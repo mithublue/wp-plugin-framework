@@ -1,4 +1,5 @@
 <?php
+namespace App\includes\core;
 /**
  * Module Manager class for WordPress Plugin Framework
  */

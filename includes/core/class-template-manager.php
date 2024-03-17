@@ -1,4 +1,6 @@
 <?php
+namespace App\includes\core;
+
 /**
  * Template Manager class for WordPress Plugin Framework
  */

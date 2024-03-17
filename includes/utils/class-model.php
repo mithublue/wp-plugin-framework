@@ -2,6 +2,7 @@
 /**
  * Model loader class
  */
+namespace App\includes\utils;
 
 class WPPF_Model{
 
@@ -42,7 +43,8 @@ class WPPF_Model{
 
 	public function model( $model ) {
 		if ( ! class_exists( $model ) ) {
-			require_once PLUGIN_DIR . '/includes/models/' . $model . '.php';
+			require_once PLUGIN_DIR . '/' . str_replace( 'App\\','',$model) . '.php';
+//			require_once PLUGIN_DIR . '/includes/models/' . $model . '.php';
 			return new $model();
 		}
 

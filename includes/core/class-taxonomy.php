@@ -1,4 +1,6 @@
 <?php
+namespace App\includes\core;
+
 /**
  * Taxonomy class for WordPress Plugin Framework
  */

@@ -1,4 +1,5 @@
 <?php
+namespace App\includes\core;
 /**
  * Custom Post Type class for WordPress Plugin Framework
  */

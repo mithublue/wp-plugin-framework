@@ -8,6 +8,11 @@
  * Domain Path: /languages
  */
 
+namespace App;
+use App\includes\core\WPPF_ModuleManager;
+use App\includes\models\Book;
+use function App\includes\utils\wppf_model;
+
 require_once 'vendor/autoload.php';
 
 // Exit if accessed directly.
@@ -56,7 +61,7 @@ class WP_PluginFramework {
 		$this->init_modules();
 
 		// Add more initialization tasks as needed
-		wppf_model()->model( Book::class )->all();
+//		wppf_model()->model( Book::class )->all();
 
 	}
 

@@ -1,5 +1,5 @@
 <?php
-
+namespace App\includes\settings;
 /**
  * WordPress settings API demo class
  *
@@ -10,7 +10,7 @@ if ( !class_exists('WPPF_Settings' ) ):
 		private $settings_api;
 
 		function __construct() {
-			$this->settings_api = new WeDevs_Settings_API;
+			$this->settings_api = new \WeDevs_Settings_API();
 
 			add_action( 'admin_init', array($this, 'admin_init') );
 			add_action( 'admin_menu', array($this, 'admin_menu') );

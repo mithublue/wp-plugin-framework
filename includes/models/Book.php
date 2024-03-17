@@ -1,4 +1,6 @@
 <?php
+namespace App\includes\models;
+
 class Book extends \WeDevs\ORM\Eloquent\Model {
 	/**
 	 * Name for table
