@@ -9,6 +9,7 @@
  */
 
 namespace App;
+use App\includes\core\MetaBoxManager;
 use App\includes\core\WPPF_ModuleManager;
 use App\includes\models\Book;
 use function App\includes\utils\wppf_model;
@@ -75,6 +76,10 @@ class WP_PluginFramework {
 		require_once plugin_dir_path(__FILE__) . 'includes/core/class-template-manager.php';
 		require_once plugin_dir_path(__FILE__) . 'includes/core/class-custom-post-type.php';
 		require_once plugin_dir_path(__FILE__) . 'includes/core/class-taxonomy.php';
+		require_once plugin_dir_path(__FILE__) . 'includes/core/traits/fields.php';
+		require_once plugin_dir_path(__FILE__) . 'includes/core/class-metabox-manager.php';
+
+
 		require_once plugin_dir_path(__FILE__) . 'includes/settings/class-settings.php';
 		require_once plugin_dir_path(__FILE__) . 'includes/security/class-security.php';
 		require_once plugin_dir_path(__FILE__) . 'includes/utils/class-model.php';
@@ -95,9 +100,20 @@ class WP_PluginFramework {
 		$module_manager->init_modules();
 	}
 
+	public function metabox_manager() {
+		return MetaBoxManager::instance();
+	}
+
 
 }
 
 // Instantiate the plugin
 $wp_plugin_framework = new WP_PluginFramework();
+\WP_Plugin_Framework::metabox_manager()->add_metabox( 'test', [
+	'title' => 'Test metabox',
+	'callback' => function() {},
+	'screen' => 'page',
+	'context' => 'normal',
+	'priority' => 'default'
+] );
 
