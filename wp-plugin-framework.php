@@ -9,8 +9,10 @@
  */
 
 namespace App;
+use App\includes\admin\Admin_Menu_Manager;
 use App\includes\core\MetaBoxManager;
 use App\includes\core\WPPF_ModuleManager;
+use App\includes\core\WPPF_Settings;
 use App\includes\models\Book;
 use function App\includes\utils\wppf_model;
 
@@ -78,6 +80,7 @@ class WP_PluginFramework {
 		require_once plugin_dir_path(__FILE__) . 'includes/core/class-taxonomy.php';
 		require_once plugin_dir_path(__FILE__) . 'includes/core/traits/fields.php';
 		require_once plugin_dir_path(__FILE__) . 'includes/core/class-metabox-manager.php';
+		require_once plugin_dir_path(__FILE__) . 'includes/core/class-settings-manager.php';
 
 
 		require_once plugin_dir_path(__FILE__) . 'includes/settings/class-settings.php';
@@ -88,6 +91,7 @@ class WP_PluginFramework {
 
 	private function include_admin_files() {
 		require_once plugin_dir_path(__FILE__) . 'includes/admin/class-admin.php';
+		require_once plugin_dir_path(__FILE__) . 'includes/admin/class-admin-menu-manager.php';
 	}
 
 	/**
@@ -104,7 +108,13 @@ class WP_PluginFramework {
 		return MetaBoxManager::instance();
 	}
 
+	public function settings_manager() {
+		return WPPF_Settings::instance();
+	}
 
+	public function admin_menu_manager() {
+		return Admin_Menu_Manager::instance();
+	}
 }
 
 // Instantiate the plugin
@@ -125,4 +135,17 @@ $wp_plugin_framework = new WP_PluginFramework();
 		]
 	]
 ] );
+
+\WP_Plugin_Framework::settings_manager();
+\WP_Plugin_Framework::admin_menu_manager()->add_menu(
+	[
+		'title' => 'Settings API',
+		'menu_title' => 'Settings API',
+		'capability' => 'manage_options',
+		'slug' => 'settings_api_test',
+		'callback' => function() {},
+		'parent_slug' => null, //if given, it will be submenu
+	]
+);
+
 
