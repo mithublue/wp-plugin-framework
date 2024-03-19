@@ -88,9 +88,10 @@ class MetaBoxManager {
 					'value' => ''
 				]
 			];*/
-			?>
-			<input type="hidden" name="metabox_nonce_<?php echo $args['id']; ?>" value="<?php echo esc_attr( wp_create_nonce( $args['id'] ) ); ?>">
-			<?php
+
+			//generate nonce for the metabox
+			$this->generate_nonce( $args['id'] );
+
 			foreach ( $this->metaboxes[$args['id']]['fields'] as $field_name => $field_array ) {
 
 				//set value to the field
@@ -103,6 +104,17 @@ class MetaBoxManager {
 				}
 			}
 		}
+	}
+
+	/**
+	 * @param $nonce_key
+	 *
+	 * @return void
+	 */
+	public function generate_nonce( $nonce_key ) {
+		?>
+		<input type="hidden" name="metabox_nonce_<?php echo $nonce_key; ?>" value="<?php echo esc_attr( wp_create_nonce( $nonce_key ) ); ?>">
+		<?php
 	}
 
 	/**
