@@ -49,6 +49,7 @@ class Admin_Menu_Manager{
 			'slug' => 'settings_api_test',
 			'callback' => function() {},
 			'parent_slug' => null, //if given, it will be submenu
+			'type' => 'menu', //options: theme_option, settings
 		];
 		$arg = array_merge( $default, $arg );
 		$this->admin_menu[$arg['slug']] = $arg;

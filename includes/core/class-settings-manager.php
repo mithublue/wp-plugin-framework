@@ -1,5 +1,7 @@
 <?php
 namespace App\includes\core;
+use App\includes\admin\Admin_Menu_Manager;
+
 /**
  * WordPress settings API demo class
  *
@@ -39,13 +41,7 @@ if ( !class_exists('WPPF_Settings' ) ):
 		}
 
 		private $settings_api;
-		protected $settings_data = [
-			'title' => 'Settings API',
-			'menu_title' => 'Settings API',
-			'capability' => 'manage_options',
-			'menu_slug' => 'settings_api_test',
-		];
-
+		protected $settings_menu = [];
 
 
 		function __construct() {
@@ -53,6 +49,21 @@ if ( !class_exists('WPPF_Settings' ) ):
 
 			add_action( 'admin_init', array($this, 'admin_init') );
 			add_action( 'admin_menu', array($this, 'admin_menu') );
+		}
+
+		function add_settings_menu( $arg ) {
+			$default = [
+				'title' => 'Settings API',
+				'menu_title' => 'Settings API',
+				'capability' => 'manage_options',
+				'slug' => 'settings_api_test',
+				'callback' => function() {},
+				'parent_slug' => null, //if given, it will be submenu
+				'type' => 'menu', //options: theme_option, settings
+			];
+			$arg = array_merge( $default, $arg );
+			$this->settings_menu[$arg['slug']] = $arg;
+			Admin_Menu_Manager::instance()->add_menu( $arg );
 		}
 
 		function admin_init() {

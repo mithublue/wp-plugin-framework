@@ -136,13 +136,13 @@ $wp_plugin_framework = new WP_PluginFramework();
 	]
 ] );
 
-\WP_Plugin_Framework::settings_manager();
-\WP_Plugin_Framework::admin_menu_manager()->add_menu(
+//\WP_Plugin_Framework::settings_manager();
+\WP_Plugin_Framework::settings_manager()->add_settings_menu(
 	[
-		'title' => 'Settings API',
-		'menu_title' => 'Settings API',
+		'title' => 'Settings API test',
+		'menu_title' => 'Settings API test',
 		'capability' => 'manage_options',
-		'slug' => 'settings_api_test',
+		'slug' => 'settings_api_testa',
 		'callback' => function() {},
 		'parent_slug' => null, //if given, it will be submenu
 	]
