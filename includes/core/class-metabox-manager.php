@@ -8,7 +8,6 @@ class MetaBoxManager {
 	use Fields;
 
 	protected $metaboxes = [];
-	protected $nonce_metaboxes = [];
 
 	/**
 	 * Instance
@@ -54,16 +53,7 @@ class MetaBoxManager {
 	 * @return void
 	 */
 	public function add_metabox( $metabox_id, $arg ) {
-		$this->list_metabox( $metabox_id, $arg );
-		$this->list_nonce( $metabox_id, $arg );
-	}
-
-	public function list_metabox( $metabox_id, $arg ) {
 		$this->metaboxes[$metabox_id] = $arg;
-	}
-
-	public function list_nonce( $metabox_id, $arg ) {
-		$this->nonce_metaboxes['metabox_nonce_'.$metabox_id] = $arg;
 	}
 
 	// Register meta boxes
