@@ -114,6 +114,15 @@ $wp_plugin_framework = new WP_PluginFramework();
 	'callback' => function() {},
 	'screen' => 'page',
 	'context' => 'normal',
-	'priority' => 'default'
+	'priority' => 'default',
+	'fields' => [
+		'field_name_1' => [
+			'name' => 'field_name_1',
+			'type' => 'text',
+			'title' => 'First name',
+			'desc' => 'This is first name',
+			'value' => ''
+		]
+	]
 ] );
 

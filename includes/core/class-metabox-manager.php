@@ -8,6 +8,7 @@ class MetaBoxManager {
 	use Fields;
 
 	protected $metaboxes = [];
+	protected $nonce_metaboxes = [];
 
 	/**
 	 * Instance
@@ -53,7 +54,16 @@ class MetaBoxManager {
 	 * @return void
 	 */
 	public function add_metabox( $metabox_id, $arg ) {
+		$this->list_metabox( $metabox_id, $arg );
+		$this->list_nonce( $metabox_id, $arg );
+	}
+
+	public function list_metabox( $metabox_id, $arg ) {
 		$this->metaboxes[$metabox_id] = $arg;
+	}
+
+	public function list_nonce( $metabox_id, $arg ) {
+		$this->nonce_metaboxes['metabox_nonce_'.$metabox_id] = $arg;
 	}
 
 	// Register meta boxes
@@ -84,10 +94,18 @@ class MetaBoxManager {
 					'name' => 'field_name_1',
 					'type' => 'text',
 					'title' => 'First name',
-					'description' => 'This is first name'
+					'desc' => 'This is first name',
+					'value' => ''
 				]
 			];*/
+			?>
+			<input type="hidden" name="metabox_nonce_<?php echo $args['id']; ?>" value="<?php echo esc_attr( wp_create_nonce( $args['id'] ) ); ?>">
+			<?php
 			foreach ( $this->metaboxes[$args['id']]['fields'] as $field_name => $field_array ) {
+
+				//set value to the field
+				$field_array['value'] = get_post_meta( $post->ID, $field_array['name'], true );
+
 				if ( isset( $field_array['type'] ) ) {
 					if ( method_exists( $this, $field_array['type'] ) ) {
 						$this->{$field_array['type']}($field_array);
@@ -95,44 +113,55 @@ class MetaBoxManager {
 				}
 			}
 		}
-
-		// Retrieve the current value of the meta field
-		$meta_value = get_post_meta($post->ID, 'custom_meta_field', true);
-		?>
-		<label for="custom_meta_field">Custom Field:</label>
-		<input type="text" id="custom_meta_field" name="custom_meta_field" value="<?php echo esc_attr($meta_value); ?>">
-		<?php
 	}
 
-	// Save meta box data
-	public function saveMetaBoxes($post_id) {
-		// Check if the nonce is set.
-		if (!isset($_POST['meta_box_nonce'])) {
-			return $post_id;
+	/**
+	 * Save metabox
+	 * @param $post_id
+	 *
+	 * @return void
+	 */
+	public function saveMetaBoxes( $post_id ) {
+
+		foreach ( $this->metaboxes as $metabox_id => $metabox_array ) {
+			// Check if the nonce is set.
+			if ( ! isset( $_POST['metabox_nonce_'.$metabox_id] ) ) {
+				continue;
+			}
+
+			// Verify that the nonce is valid.
+			if ( ! wp_verify_nonce( $_POST['metabox_nonce_'.$metabox_id], $metabox_id ) ) {
+				continue;
+			}
+
+			// Check if this is an autosave.
+			if (defined('DOING_AUTOSAVE') && DOING_AUTOSAVE) {
+				continue;
+			}
+
+			// Check the post type.
+			if ( $metabox_array['screen'] !== $_POST['post_type']) {
+				continue;
+			}
+
+			$this->save_data( $post_id, $metabox_array['fields'], $_POST );
 		}
+	}
 
-		// Verify that the nonce is valid.
-		if (!wp_verify_nonce($_POST['meta_box_nonce'], 'my_custom_meta_box_nonce')) {
-			return $post_id;
+	/**
+	 * @param $post_id
+	 * @param $field_array
+	 * @param $postdata
+	 *
+	 * @return void
+	 */
+	public function save_data( $post_id, $field_array, $postdata ) {
+		foreach ( $field_array as $name => $field ) {
+			if ( isset( $postdata[$field['name']] ) ) {
+				// Sanitize user input and update.
+				$meta_value = sanitize_text_field( $postdata[$field['name']] );
+				update_post_meta( $post_id, $field['name'], $meta_value);
+			}
 		}
-
-		// Check if this is an autosave.
-		if (defined('DOING_AUTOSAVE') && DOING_AUTOSAVE) {
-			return $post_id;
-		}
-
-		// Check the post type.
-		if ('post' !== $_POST['post_type']) {
-			return $post_id;
-		}
-
-		// Sanitize user input.
-		$meta_value = sanitize_text_field($_POST['custom_meta_field']);
-
-		// Update the meta field in the database.
-		update_post_meta($post_id, 'custom_meta_field', $meta_value);
 	}
 }
-
-// Instantiate the MetaBoxManager
-//new MetaBoxManager();
