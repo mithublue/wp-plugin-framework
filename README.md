@@ -5,13 +5,15 @@ A framework for wp plugin development
 
 Just download this plugin and activate it. That's it ! Then, create your own plugin or theme code and use the following features the way it is shown below.
 
-## Features
+# Features
 
-* Template management
-* Module concept
-* Post Types
-* Taxonomy
-* Eloquent ORM (Inspired by Tariq Hasan)
+### Template management
+### Module concept
+### Post Types
+### Taxonomy
+
+### Eloquent ORM
+You can use Laravel Eloquent ORM. The documentation is here: https://github.com/as247/wp-eloquent 
 
 ### Metabox manager
 
