@@ -34,11 +34,11 @@ if ( !class_exists('WPPF_Settings' ) ):
 			$sections = array(
 				array(
 					'id'    => 'wedevs_basics',
-					'title' => __( 'Basic Settings', 'wedevs' )
+					'title' => __( 'Basic Settings', 'wppf' )
 				),
 				array(
 					'id'    => 'wedevs_advanced',
-					'title' => __( 'Advanced Settings', 'wedevs' )
+					'title' => __( 'Advanced Settings', 'wppf' )
 				)
 			);
 			return $sections;
@@ -54,18 +54,18 @@ if ( !class_exists('WPPF_Settings' ) ):
 				'wedevs_basics' => array(
 					array(
 						'name'              => 'text_val',
-						'label'             => __( 'Text Input', 'wedevs' ),
-						'desc'              => __( 'Text input description', 'wedevs' ),
-						'placeholder'       => __( 'Text Input placeholder', 'wedevs' ),
+						'label'             => __( 'Text Input', 'wppf' ),
+						'desc'              => __( 'Text input description', 'wppf' ),
+						'placeholder'       => __( 'Text Input placeholder', 'wppf' ),
 						'type'              => 'text',
 						'default'           => 'Title',
 						'sanitize_callback' => 'sanitize_text_field'
 					),
 					array(
 						'name'              => 'number_input',
-						'label'             => __( 'Number Input', 'wedevs' ),
-						'desc'              => __( 'Number field with validation callback `floatval`', 'wedevs' ),
-						'placeholder'       => __( '1.99', 'wedevs' ),
+						'label'             => __( 'Number Input', 'wppf' ),
+						'desc'              => __( 'Number field with validation callback `floatval`', 'wppf' ),
+						'placeholder'       => __( '1.99', 'wppf' ),
 						'min'               => 0,
 						'max'               => 100,
 						'step'              => '0.01',
@@ -75,26 +75,26 @@ if ( !class_exists('WPPF_Settings' ) ):
 					),
 					array(
 						'name'        => 'textarea',
-						'label'       => __( 'Textarea Input', 'wedevs' ),
-						'desc'        => __( 'Textarea description', 'wedevs' ),
-						'placeholder' => __( 'Textarea placeholder', 'wedevs' ),
+						'label'       => __( 'Textarea Input', 'wppf' ),
+						'desc'        => __( 'Textarea description', 'wppf' ),
+						'placeholder' => __( 'Textarea placeholder', 'wppf' ),
 						'type'        => 'textarea'
 					),
 					array(
 						'name'        => 'html',
-						'desc'        => __( 'HTML area description. You can use any <strong>bold</strong> or other HTML elements.', 'wedevs' ),
+						'desc'        => __( 'HTML area description. You can use any <strong>bold</strong> or other HTML elements.', 'wppf' ),
 						'type'        => 'html'
 					),
 					array(
 						'name'  => 'checkbox',
-						'label' => __( 'Checkbox', 'wedevs' ),
-						'desc'  => __( 'Checkbox Label', 'wedevs' ),
+						'label' => __( 'Checkbox', 'wppf' ),
+						'desc'  => __( 'Checkbox Label', 'wppf' ),
 						'type'  => 'checkbox'
 					),
 					array(
 						'name'    => 'radio',
-						'label'   => __( 'Radio Button', 'wedevs' ),
-						'desc'    => __( 'A radio button', 'wedevs' ),
+						'label'   => __( 'Radio Button', 'wppf' ),
+						'desc'    => __( 'A radio button', 'wppf' ),
 						'type'    => 'radio',
 						'options' => array(
 							'yes' => 'Yes',
@@ -103,7 +103,7 @@ if ( !class_exists('WPPF_Settings' ) ):
 					),
 					array(
 						'name'    => 'selectbox',
-						'label'   => __( 'A Dropdown', 'wedevs' ),
+						'label'   => __( 'A Dropdown', 'wppf' ),
 						'desc'    => __( 'Dropdown description', 'wedevs' ),
 						'type'    => 'select',
 						'default' => 'no',

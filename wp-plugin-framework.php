@@ -136,6 +136,16 @@ $wp_plugin_framework = new WP_PluginFramework();
 	]
 ] );
 
+\WP_Plugin_Framework::admin_menu_manager()->add_menu( [
+	'title' => 'WPPF Admin Menu',
+	'menu_title' => 'WPPF Admin Menu Page',
+	'capability' => 'manage_options',
+	'slug' => 'settings_api_test',
+	'callback' => function() {},
+	'parent_slug' => null, //if given, it will be submenu
+	'type' => 'menu', //options: theme_option, settings
+] );
+
 //\WP_Plugin_Framework::settings_manager();
 \WP_Plugin_Framework::settings_manager()->add_settings_menu(
 	[

@@ -70,18 +70,18 @@ if ( !class_exists('WPPF_Settings' ) ):
 					'wppf_basics' => array(
 						array(
 							'name'              => 'text_val',
-							'label'             => __( 'Text Input', 'wedevs' ),
-							'desc'              => __( 'Text input description', 'wedevs' ),
-							'placeholder'       => __( 'Text Input placeholder', 'wedevs' ),
+							'label'             => __( 'Text Input', 'wppf' ),
+							'desc'              => __( 'Text input description', 'wppf' ),
+							'placeholder'       => __( 'Text Input placeholder', 'wppf' ),
 							'type'              => 'text',
 							'default'           => 'Title',
 							'sanitize_callback' => 'sanitize_text_field'
 						),
 						array(
 							'name'              => 'number_input',
-							'label'             => __( 'Number Input', 'wedevs' ),
-							'desc'              => __( 'Number field with validation callback `floatval`', 'wedevs' ),
-							'placeholder'       => __( '1.99', 'wedevs' ),
+							'label'             => __( 'Number Input', 'wppf' ),
+							'desc'              => __( 'Number field with validation callback `floatval`', 'wppf' ),
+							'placeholder'       => __( '1.99', 'wppf' ),
 							'min'               => 0,
 							'max'               => 100,
 							'step'              => '0.01',
@@ -91,26 +91,26 @@ if ( !class_exists('WPPF_Settings' ) ):
 						),
 						array(
 							'name'        => 'textarea',
-							'label'       => __( 'Textarea Input', 'wedevs' ),
-							'desc'        => __( 'Textarea description', 'wedevs' ),
-							'placeholder' => __( 'Textarea placeholder', 'wedevs' ),
+							'label'       => __( 'Textarea Input', 'wppf' ),
+							'desc'        => __( 'Textarea description', 'wppf' ),
+							'placeholder' => __( 'Textarea placeholder', 'wppf' ),
 							'type'        => 'textarea'
 						),
 						array(
 							'name'        => 'html',
-							'desc'        => __( 'HTML area description. You can use any <strong>bold</strong> or other HTML elements.', 'wedevs' ),
+							'desc'        => __( 'HTML area description. You can use any <strong>bold</strong> or other HTML elements.', 'wppf' ),
 							'type'        => 'html'
 						),
 						array(
 							'name'  => 'checkbox',
-							'label' => __( 'Checkbox', 'wedevs' ),
-							'desc'  => __( 'Checkbox Label', 'wedevs' ),
+							'label' => __( 'Checkbox', 'wppf' ),
+							'desc'  => __( 'Checkbox Label', 'wppf' ),
 							'type'  => 'checkbox'
 						),
 						array(
 							'name'    => 'radio',
-							'label'   => __( 'Radio Button', 'wedevs' ),
-							'desc'    => __( 'A radio button', 'wedevs' ),
+							'label'   => __( 'Radio Button', 'wppf' ),
+							'desc'    => __( 'A radio button', 'wppf' ),
 							'type'    => 'radio',
 							'options' => array(
 								'yes' => 'Yes',
@@ -119,8 +119,8 @@ if ( !class_exists('WPPF_Settings' ) ):
 						),
 						array(
 							'name'    => 'selectbox',
-							'label'   => __( 'A Dropdown', 'wedevs' ),
-							'desc'    => __( 'Dropdown description', 'wedevs' ),
+							'label'   => __( 'A Dropdown', 'wppf' ),
+							'desc'    => __( 'Dropdown description', 'wppf' ),
 							'type'    => 'select',
 							'default' => 'no',
 							'options' => array(
@@ -130,15 +130,15 @@ if ( !class_exists('WPPF_Settings' ) ):
 						),
 						array(
 							'name'    => 'password',
-							'label'   => __( 'Password', 'wedevs' ),
-							'desc'    => __( 'Password description', 'wedevs' ),
+							'label'   => __( 'Password', 'wppf' ),
+							'desc'    => __( 'Password description', 'wppf' ),
 							'type'    => 'password',
 							'default' => ''
 						),
 						array(
 							'name'    => 'file',
-							'label'   => __( 'File', 'wedevs' ),
-							'desc'    => __( 'File description', 'wedevs' ),
+							'label'   => __( 'File', 'wppf' ),
+							'desc'    => __( 'File description', 'wppf' ),
 							'type'    => 'file',
 							'default' => '',
 							'options' => array(
@@ -149,22 +149,22 @@ if ( !class_exists('WPPF_Settings' ) ):
 					'wppf_advanced' => array(
 						array(
 							'name'    => 'color',
-							'label'   => __( 'Color', 'wedevs' ),
-							'desc'    => __( 'Color description', 'wedevs' ),
+							'label'   => __( 'Color', 'wppf' ),
+							'desc'    => __( 'Color description', 'wppf' ),
 							'type'    => 'color',
 							'default' => ''
 						),
 						array(
 							'name'    => 'password',
-							'label'   => __( 'Password', 'wedevs' ),
-							'desc'    => __( 'Password description', 'wedevs' ),
+							'label'   => __( 'Password', 'wppf' ),
+							'desc'    => __( 'Password description', 'wppf' ),
 							'type'    => 'password',
 							'default' => ''
 						),
 						array(
 							'name'    => 'wysiwyg',
-							'label'   => __( 'Advanced Editor', 'wedevs' ),
-							'desc'    => __( 'WP_Editor description', 'wedevs' ),
+							'label'   => __( 'Advanced Editor', 'wppf' ),
+							'desc'    => __( 'WP_Editor description', 'wppf' ),
 							'type'    => 'wysiwyg',
 							'default' => ''
 						),
