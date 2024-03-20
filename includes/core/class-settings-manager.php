@@ -54,9 +54,6 @@ if ( !class_exists('WPPF_Settings' ) ):
 				'menu_title' => 'Settings API',
 				'capability' => 'manage_options',
 				'slug' => 'settings_api_test',
-				'callback' => function() use ( $arg ) {
-					$this->plugin_page( $_REQUEST['page'] );
-				},
 				'parent_slug' => null, //if given, it will be submenu
 				'type' => 'menu', //options: theme_option, settings
 				'sections' => [
@@ -188,6 +185,10 @@ if ( !class_exists('WPPF_Settings' ) ):
 				)
 			];
 			$arg = array_merge( $default, $arg );
+			//making sure, there is no callback is set from outside in args.
+			$arg['callback'] = function() {
+				$this->plugin_page( $_REQUEST['page'] );
+			};
 			$this->settings_api[ $arg['slug'] ] = new \WeDevs_Settings_API();
 			$this->settings_menu[$arg['slug']] = $arg;
 
