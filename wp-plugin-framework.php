@@ -83,7 +83,7 @@ class WP_PluginFramework {
 		require_once plugin_dir_path(__FILE__) . 'includes/core/class-settings-manager.php';
 
 
-		require_once plugin_dir_path(__FILE__) . 'includes/settings/class-settings.php';
+//		require_once plugin_dir_path(__FILE__) . 'includes/settings/class-settings.php';
 		require_once plugin_dir_path(__FILE__) . 'includes/security/class-security.php';
 		require_once plugin_dir_path(__FILE__) . 'includes/utils/class-model.php';
 		// Add more file inclusions as needed
@@ -139,12 +139,6 @@ $wp_plugin_framework = new WP_PluginFramework();
 //\WP_Plugin_Framework::settings_manager();
 \WP_Plugin_Framework::settings_manager()->add_settings_menu(
 	[
-		'title' => 'Settings API test',
-		'menu_title' => 'Settings API test',
-		'capability' => 'manage_options',
-		'slug' => 'settings_api_testa',
-		'callback' => function() {},
-		'parent_slug' => null, //if given, it will be submenu
 	]
 );
 

@@ -45,10 +45,7 @@ if ( !class_exists('WPPF_Settings' ) ):
 
 
 		function __construct() {
-			$this->settings_api = new \WeDevs_Settings_API();
-
 			add_action( 'admin_init', array($this, 'admin_init') );
-			add_action( 'admin_menu', array($this, 'admin_menu') );
 		}
 
 		function add_settings_menu( $arg ) {
@@ -57,40 +54,160 @@ if ( !class_exists('WPPF_Settings' ) ):
 				'menu_title' => 'Settings API',
 				'capability' => 'manage_options',
 				'slug' => 'settings_api_test',
-				'callback' => function() {},
+				'callback' => function() use ( $arg ) {
+					$this->plugin_page( $_REQUEST['page'] );
+				},
 				'parent_slug' => null, //if given, it will be submenu
 				'type' => 'menu', //options: theme_option, settings
+				'sections' => [
+					[
+						'id'    => 'wppf_basics',
+						'title' => __( 'Basic Settings', 'wppf' )
+					],
+					[
+						'id'    => 'wppf_advanced',
+						'title' => __( 'Advanced Settings', 'wppf' )
+					]
+				],
+				'fields' => array(
+					'wppf_basics' => array(
+						array(
+							'name'              => 'text_val',
+							'label'             => __( 'Text Input', 'wedevs' ),
+							'desc'              => __( 'Text input description', 'wedevs' ),
+							'placeholder'       => __( 'Text Input placeholder', 'wedevs' ),
+							'type'              => 'text',
+							'default'           => 'Title',
+							'sanitize_callback' => 'sanitize_text_field'
+						),
+						array(
+							'name'              => 'number_input',
+							'label'             => __( 'Number Input', 'wedevs' ),
+							'desc'              => __( 'Number field with validation callback `floatval`', 'wedevs' ),
+							'placeholder'       => __( '1.99', 'wedevs' ),
+							'min'               => 0,
+							'max'               => 100,
+							'step'              => '0.01',
+							'type'              => 'number',
+							'default'           => 'Title',
+							'sanitize_callback' => 'floatval'
+						),
+						array(
+							'name'        => 'textarea',
+							'label'       => __( 'Textarea Input', 'wedevs' ),
+							'desc'        => __( 'Textarea description', 'wedevs' ),
+							'placeholder' => __( 'Textarea placeholder', 'wedevs' ),
+							'type'        => 'textarea'
+						),
+						array(
+							'name'        => 'html',
+							'desc'        => __( 'HTML area description. You can use any <strong>bold</strong> or other HTML elements.', 'wedevs' ),
+							'type'        => 'html'
+						),
+						array(
+							'name'  => 'checkbox',
+							'label' => __( 'Checkbox', 'wedevs' ),
+							'desc'  => __( 'Checkbox Label', 'wedevs' ),
+							'type'  => 'checkbox'
+						),
+						array(
+							'name'    => 'radio',
+							'label'   => __( 'Radio Button', 'wedevs' ),
+							'desc'    => __( 'A radio button', 'wedevs' ),
+							'type'    => 'radio',
+							'options' => array(
+								'yes' => 'Yes',
+								'no'  => 'No'
+							)
+						),
+						array(
+							'name'    => 'selectbox',
+							'label'   => __( 'A Dropdown', 'wedevs' ),
+							'desc'    => __( 'Dropdown description', 'wedevs' ),
+							'type'    => 'select',
+							'default' => 'no',
+							'options' => array(
+								'yes' => 'Yes',
+								'no'  => 'No'
+							)
+						),
+						array(
+							'name'    => 'password',
+							'label'   => __( 'Password', 'wedevs' ),
+							'desc'    => __( 'Password description', 'wedevs' ),
+							'type'    => 'password',
+							'default' => ''
+						),
+						array(
+							'name'    => 'file',
+							'label'   => __( 'File', 'wedevs' ),
+							'desc'    => __( 'File description', 'wedevs' ),
+							'type'    => 'file',
+							'default' => '',
+							'options' => array(
+								'button_label' => 'Choose Image'
+							)
+						)
+					),
+					'wppf_advanced' => array(
+						array(
+							'name'    => 'color',
+							'label'   => __( 'Color', 'wedevs' ),
+							'desc'    => __( 'Color description', 'wedevs' ),
+							'type'    => 'color',
+							'default' => ''
+						),
+						array(
+							'name'    => 'password',
+							'label'   => __( 'Password', 'wedevs' ),
+							'desc'    => __( 'Password description', 'wedevs' ),
+							'type'    => 'password',
+							'default' => ''
+						),
+						array(
+							'name'    => 'wysiwyg',
+							'label'   => __( 'Advanced Editor', 'wedevs' ),
+							'desc'    => __( 'WP_Editor description', 'wedevs' ),
+							'type'    => 'wysiwyg',
+							'default' => ''
+						),
+						array(
+							'name'    => 'multicheck',
+							'label'   => __( 'Multile checkbox', 'wedevs' ),
+							'desc'    => __( 'Multi checkbox description', 'wedevs' ),
+							'type'    => 'multicheck',
+							'default' => array('one' => 'one', 'four' => 'four'),
+							'options' => array(
+								'one'   => 'One',
+								'two'   => 'Two',
+								'three' => 'Three',
+								'four'  => 'Four'
+							)
+						),
+					)
+				)
 			];
 			$arg = array_merge( $default, $arg );
+			$this->settings_api[ $arg['slug'] ] = new \WeDevs_Settings_API();
 			$this->settings_menu[$arg['slug']] = $arg;
+
+			//making admin menu
 			Admin_Menu_Manager::instance()->add_menu( $arg );
 		}
 
 		function admin_init() {
-
-			//set the settings
-			$this->settings_api->set_sections( $this->get_settings_sections() );
-			$this->settings_api->set_fields( $this->get_settings_fields() );
-
-			//initialize settings
-			$this->settings_api->admin_init();
+			foreach ( $this->settings_api as $each_slug => $settings_obj ) {
+				//set the settings
+				$settings_obj->set_sections( $this->get_settings_sections( $each_slug ) );
+				$settings_obj->set_fields( $this->get_settings_fields( $each_slug ) );
+				//initialize settings
+				$settings_obj->admin_init();
+			}
 		}
 
-		function admin_menu() {
-			add_options_page( 'Settings API', 'Settings API', 'delete_posts', 'settings_api_test', array($this, 'plugin_page') );
-		}
-
-		function get_settings_sections() {
-			$sections = array(
-				array(
-					'id'    => 'wedevs_basics',
-					'title' => __( 'Basic Settings', 'wedevs' )
-				),
-				array(
-					'id'    => 'wedevs_advanced',
-					'title' => __( 'Advanced Settings', 'wedevs' )
-				)
-			);
+		function get_settings_sections( $settings_slug ) {
+			//returing the sections associated with this slugs in the settings_menu
+			$sections = $this->settings_menu[$settings_slug]['sections'];
 			return $sections;
 		}
 
@@ -99,133 +216,17 @@ if ( !class_exists('WPPF_Settings' ) ):
 		 *
 		 * @return array settings fields
 		 */
-		function get_settings_fields() {
-			$settings_fields = array(
-				'wedevs_basics' => array(
-					array(
-						'name'              => 'text_val',
-						'label'             => __( 'Text Input', 'wedevs' ),
-						'desc'              => __( 'Text input description', 'wedevs' ),
-						'placeholder'       => __( 'Text Input placeholder', 'wedevs' ),
-						'type'              => 'text',
-						'default'           => 'Title',
-						'sanitize_callback' => 'sanitize_text_field'
-					),
-					array(
-						'name'              => 'number_input',
-						'label'             => __( 'Number Input', 'wedevs' ),
-						'desc'              => __( 'Number field with validation callback `floatval`', 'wedevs' ),
-						'placeholder'       => __( '1.99', 'wedevs' ),
-						'min'               => 0,
-						'max'               => 100,
-						'step'              => '0.01',
-						'type'              => 'number',
-						'default'           => 'Title',
-						'sanitize_callback' => 'floatval'
-					),
-					array(
-						'name'        => 'textarea',
-						'label'       => __( 'Textarea Input', 'wedevs' ),
-						'desc'        => __( 'Textarea description', 'wedevs' ),
-						'placeholder' => __( 'Textarea placeholder', 'wedevs' ),
-						'type'        => 'textarea'
-					),
-					array(
-						'name'        => 'html',
-						'desc'        => __( 'HTML area description. You can use any <strong>bold</strong> or other HTML elements.', 'wedevs' ),
-						'type'        => 'html'
-					),
-					array(
-						'name'  => 'checkbox',
-						'label' => __( 'Checkbox', 'wedevs' ),
-						'desc'  => __( 'Checkbox Label', 'wedevs' ),
-						'type'  => 'checkbox'
-					),
-					array(
-						'name'    => 'radio',
-						'label'   => __( 'Radio Button', 'wedevs' ),
-						'desc'    => __( 'A radio button', 'wedevs' ),
-						'type'    => 'radio',
-						'options' => array(
-							'yes' => 'Yes',
-							'no'  => 'No'
-						)
-					),
-					array(
-						'name'    => 'selectbox',
-						'label'   => __( 'A Dropdown', 'wedevs' ),
-						'desc'    => __( 'Dropdown description', 'wedevs' ),
-						'type'    => 'select',
-						'default' => 'no',
-						'options' => array(
-							'yes' => 'Yes',
-							'no'  => 'No'
-						)
-					),
-					array(
-						'name'    => 'password',
-						'label'   => __( 'Password', 'wedevs' ),
-						'desc'    => __( 'Password description', 'wedevs' ),
-						'type'    => 'password',
-						'default' => ''
-					),
-					array(
-						'name'    => 'file',
-						'label'   => __( 'File', 'wedevs' ),
-						'desc'    => __( 'File description', 'wedevs' ),
-						'type'    => 'file',
-						'default' => '',
-						'options' => array(
-							'button_label' => 'Choose Image'
-						)
-					)
-				),
-				'wedevs_advanced' => array(
-					array(
-						'name'    => 'color',
-						'label'   => __( 'Color', 'wedevs' ),
-						'desc'    => __( 'Color description', 'wedevs' ),
-						'type'    => 'color',
-						'default' => ''
-					),
-					array(
-						'name'    => 'password',
-						'label'   => __( 'Password', 'wedevs' ),
-						'desc'    => __( 'Password description', 'wedevs' ),
-						'type'    => 'password',
-						'default' => ''
-					),
-					array(
-						'name'    => 'wysiwyg',
-						'label'   => __( 'Advanced Editor', 'wedevs' ),
-						'desc'    => __( 'WP_Editor description', 'wedevs' ),
-						'type'    => 'wysiwyg',
-						'default' => ''
-					),
-					array(
-						'name'    => 'multicheck',
-						'label'   => __( 'Multile checkbox', 'wedevs' ),
-						'desc'    => __( 'Multi checkbox description', 'wedevs' ),
-						'type'    => 'multicheck',
-						'default' => array('one' => 'one', 'four' => 'four'),
-						'options' => array(
-							'one'   => 'One',
-							'two'   => 'Two',
-							'three' => 'Three',
-							'four'  => 'Four'
-						)
-					),
-				)
-			);
-
+		function get_settings_fields( $settings_slug ) {
+			//returning the fields for the sections
+			$settings_fields = $this->settings_menu[$settings_slug]['fields'];
 			return $settings_fields;
 		}
 
-		function plugin_page() {
+		function plugin_page( $slug ) {
 			echo '<div class="wrap">';
 
-			$this->settings_api->show_navigation();
-			$this->settings_api->show_forms();
+			$this->settings_api[$slug]->show_navigation();
+			$this->settings_api[$slug]->show_forms();
 
 			echo '</div>';
 		}
